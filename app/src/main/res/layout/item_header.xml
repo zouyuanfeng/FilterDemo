@@ -14,5 +14,6 @@
         android:layout_height="33dp"
         android:layout_margin="8dp"
         android:gravity="center_vertical"
-        android:text="我是标题" />
+        android:text="我是标题"
+        android:textColor="#666666" />
 </FrameLayout>
