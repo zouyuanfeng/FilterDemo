@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public int getSpanSize(int i) {
                 if (data.get(i).getType() == LabelBean.HEADER)
-                    return 3;
+                    return 3;//如果为header，把三格全占满
                 else return 1;
             }
         });

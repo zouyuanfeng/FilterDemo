@@ -42,13 +42,12 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         LabelBean labelBean = getData(position);
         if (labelBean.getType() == LabelBean.LABEL) {
             CheckedTextView textView = ((CheckedTextView) ((LabelViewHolder) viewHolder).itemView);
-            textView.setChecked(labelBean.isChecked());
+            textView.setChecked(labelBean.isChecked()); //重新设置check值，防止因复用布局导致的错乱
             textView.setText(labelBean.getLabel());
             textView.setTag(labelBean);
             textView.setOnClickListener(v -> onCheckClick((CheckedTextView) v));
         } else {
-
-            ((HeaderViewHolder) viewHolder).tvTitle.setText(labelBean.getLabel());
+            ((HeaderViewHolder) viewHolder).tvTitle.setText(labelBean.getLabel()); //header
         }
     }
 
