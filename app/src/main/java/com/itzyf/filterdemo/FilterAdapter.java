@@ -58,6 +58,8 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             oldBean.setChecked(false);
             if (oldBean == tag) {
                 oldCheckBean.remove(tag.getGroupName());
+                if (listener != null)
+                    listener.onChargeCheck(tag);
                 notifyDataSetChanged();
                 return;
             }
@@ -65,7 +67,7 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         tag.setChecked(true);
         oldCheckBean.put(tag.getGroupName(), tag);
         if (listener != null)
-            listener.onCheck(tag);
+            listener.onChargeCheck(tag);
         notifyDataSetChanged();
     }
 
@@ -105,6 +107,24 @@ public class FilterAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     interface OnCheckListener {
-        void onCheck(LabelBean item);
+        void onChargeCheck(LabelBean item);
+    }
+
+    /**
+     * 获取选择的label
+     *
+     * @return
+     */
+    public Map<String, LabelBean> getCheckLabel() {
+        return oldCheckBean;
+    }
+
+    public void clearCheck() {
+        for (Map.Entry<String, LabelBean> label : oldCheckBean.entrySet()) {
+            label.getValue().setChecked(false);
+        }
+        oldCheckBean.clear();
+        if (listener != null) listener.onChargeCheck(null);
+        notifyDataSetChanged();
     }
 }
